@@ -43,7 +43,7 @@ const getOtp = async (req, res) => {
       }
     }
 
-    const otpRecord = await databases.createDocument(
+    const otpDocument = await databases.createDocument(
       databaseId,
       collectionId,
       ID.unique(),
@@ -60,15 +60,13 @@ const getOtp = async (req, res) => {
       check: phoneNumber,
       success: true,
       message: "OTP sent successfully",
-      otpId: otpRecord.$id,
+      otpId: otpDocument.$id,
     };
 
     const encoded = await encode(JSON.stringify(details));
 
     sendMessage(phoneNumber, phoneMessage)
-      .then((data) =>
-        res.status(200).json({ Status: "Success", Details: encoded })
-      )
+      .then(() => res.status(200).json({ Status: "Success", Details: encoded }))
       .catch((error) =>
         res.status(400).json({ Status: "Failure", Details: error })
       );
