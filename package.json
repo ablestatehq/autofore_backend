@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is the backend for the messaging service",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "africastalking",
+    "express",
+    "node",
+    "messaging",
+    "sms"
+  ],
+  "author": "David Derrick Anyuru",
+  "license": "ISC"
+}
