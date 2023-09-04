@@ -10,6 +10,6 @@ const client = new Client()
   .setProject(appwriteProjectId)
   .setKey(appwriteApiKey);
 
-const database = new Databases(client);
+const databases = new Databases(client);
 
-export { database };
+module.exports = { databases };

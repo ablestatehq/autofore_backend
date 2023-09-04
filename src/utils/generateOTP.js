@@ -1,9 +1,9 @@
-const crypto = require("crypto");
-crypto.randomBytes(32, (error, buffer) => {
-  if (error) {
-    console.log(error);
-    return;
-  } else {
-    console.log(`Security Key: ${buffer.toString("hex")}`);
-  }
-});
+/**
+ * @function
+ * @name generateOTP
+ * @returns {Number} A six digit random code
+ */
+
+const generateOTP = () =>
+  Math.floor(100000 + Math.random() * 900000).toString();
+module.exports = generateOTP;
