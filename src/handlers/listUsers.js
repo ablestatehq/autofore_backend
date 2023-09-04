@@ -1,0 +1,43 @@
+require("dotenv").config();
+const { users } = require("../appwrite/appwrite");
+const { Query } = require("node-appwrite");
+
+const isUserRegistered = async (req, res) => {
+  const phoneNumber = req.body.phoneNumber;
+
+  try {
+    const response = await users.list([
+      Query.equal("phone", `+256${phoneNumber.slice(1)}`),
+    ]);
+  
+
+    if (response?.total === 1) {
+      // User is registered
+      return res.status(200).json({
+        status: "success",
+        message: "Phone number is already registered",
+        userExists: true,
+      });
+
+    } else if (response?.total === 0) {
+        console.log("here")
+      // User is not registered
+      return res.status(200).json({
+        status: "error",
+        message: "Phone number is not registered",
+        userExists: false,
+      });
+    }
+  } catch (error) {
+    console.error("Error checking user registration:", error);
+    return res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: {
+        error: "An unexpected error occurred while checking user registration.",
+      },
+    });
+  }
+};
+
+module.exports = isUserRegistered;

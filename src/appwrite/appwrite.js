@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Client, Databases } = require("node-appwrite");
+const { Client, Databases, Users } = require("node-appwrite");
 
 const appwriteUrl = process.env.APPWRITE_URL;
 const appwriteProjectId = process.env.APPWRITE_PROJECT_ID;
@@ -11,5 +11,6 @@ const client = new Client()
   .setKey(appwriteApiKey);
 
 const databases = new Databases(client);
+const users = new Users(client);
 
-module.exports = { databases };
+module.exports = { databases, users };

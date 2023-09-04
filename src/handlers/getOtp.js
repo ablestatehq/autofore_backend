@@ -11,7 +11,6 @@ const databaseId = process.env.APPWRITE_DATABASE_ID;
 const collectionId = process.env.APPWRITE_OTP_COLLECTION_ID;
 
 const getOtp = async (req, res) => {
-  console.log(req.body);
   try {
     const { phoneNumber, type } = req.body;
     let phoneMessage;
@@ -66,7 +65,9 @@ const getOtp = async (req, res) => {
     const encoded = await encode(JSON.stringify(details));
 
     sendMessage(phoneNumber, phoneMessage)
-      .then(() => res.status(200).json({ Status: "Success", Details: encoded }))
+      .then(() => {
+        res.status(200).json({ Status: "Success", Details: encoded });
+      })
       .catch((error) =>
         res.status(400).json({ Status: "Failure", Details: error })
       );
