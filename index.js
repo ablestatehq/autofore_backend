@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const getOtp = require("./src/handlers/getOtp");
-const verifyOtp = require("./src/handlers/verifyOtp");
+const sendOtp = require("./src/handlers/sendOtp");
 const isUserRegistered = require("./src/handlers/isUserRegistered");
 const createUser = require("./src/handlers/createUser")
 const app = express();
@@ -10,10 +9,9 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post("/get-otp", getOtp);
+app.post("/messages/send-otp", sendOtp);
 app.post("/users/is-registered", isUserRegistered);
-app.post("/verify-otp", verifyOtp);
-app.post("/users/create-customer", createUser);
+app.post("/users/create", createUser);
 
 app.listen(port, () => {
   console.log(`Example app listening on port  http://localhost:${port}`);

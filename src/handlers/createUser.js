@@ -3,7 +3,7 @@ const { teams, users } = require("../appwrite/appwrite");
 const team = process.env.APPWRITE_CUSTOMER_TEAM_ID;
 
 const createUser = async (req, res) => {
-  const { phoneNumber, password } = req.body;
+  const { phoneNumber } = req.body;
 
   if (!phoneNumber) {
     const response = {
@@ -13,17 +13,11 @@ const createUser = async (req, res) => {
     return res.status(400).json(response);
   }
 
-  if (!password) {
-    const response = { Status: "Failure", Details: "Password not provided" };
-    return res.status(400).json(response);
-  }
-
   try {
     const user = await users.create(
       ID.unique(),
       undefined,
-      `+256${phoneNumber.slice(1)}`,
-      password
+      `+256${phoneNumber.slice(1)}`
     );
 
     if (user) {
@@ -41,8 +35,8 @@ const createUser = async (req, res) => {
             Status: "Success",
             Details: "User created successfully",
             Data: {
-              userId: user.$id,
-              customerMembershipId: customerMembership.$id,
+              UserId: user.$id,
+              CustomerMembershipId: customerMembership.$id,
             },
           };
 
