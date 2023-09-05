@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.post("/get-otp", getOtp);
 app.post("/users/is-registered", isUserRegistered);
-app.post("verify-otp", verifyOtp);
+app.post("/verify-otp", verifyOtp);
 
 app.listen(port, () => {
   console.log(`Example app listening on port  http://localhost:${port}`);

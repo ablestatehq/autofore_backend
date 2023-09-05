@@ -36,8 +36,8 @@ const getOtp = async (req, res) => {
       if (type === "FORGOT PASSWORD") {
         const message = require("../utils/messages/passwordForget");
         phoneMessage = message(otp);
-      } else if (type === "2FA") {
-        const message = require("../utils/messages/phone2FA");
+      } else if (type === "VERIFICATION") {
+        const message = require("../utils/messages/phoneVerification");
         phoneMessage = message(otp);
       }
     }
