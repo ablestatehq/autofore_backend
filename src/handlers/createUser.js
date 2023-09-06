@@ -3,9 +3,9 @@ const { teams, users } = require("../appwrite/appwrite");
 const team = process.env.APPWRITE_CUSTOMER_TEAM_ID;
 
 const createUser = async (req, res) => {
-  const { phoneNumber } = req.body;
+  const { phone } = req.body;
 
-  if (!phoneNumber) {
+  if (!phone) {
     const response = {
       Status: "Failure",
       Details: "Phone Number not provided",
@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
     const user = await users.create(
       ID.unique(),
       undefined,
-      `+256${phoneNumber.slice(1)}`
+      `+256${phone.slice(1)}`
     );
 
     if (user) {
