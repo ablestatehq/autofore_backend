@@ -16,6 +16,7 @@ const isUserRegistered = async (req, res) => {
         status: "success",
         message: "The phone is already registered",
         userExists: true,
+        userId: response?.users[0].$id,
       });
     } else if (response?.total === 0) {
       console.log("here");
@@ -24,6 +25,7 @@ const isUserRegistered = async (req, res) => {
         status: "error",
         message: "Phone number is not registered",
         userExists: false,
+        userId: null,
       });
     }
   } catch (error) {

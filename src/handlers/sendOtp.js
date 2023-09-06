@@ -8,7 +8,9 @@ const sendOtp = async (req, res) => {
     const phoneMessage = message(otp);
     sendMessage(phoneNumber, phoneMessage)
       .then(() => {
-        res.status(200).json({ Status: "Success", Details: "OTP successfully sent" });
+        res
+          .status(200)
+          .json({ Status: "Success", Details: "OTP successfully sent" });
       })
       .catch((error) =>
         res.status(400).json({ Status: "Failure", Details: error })
