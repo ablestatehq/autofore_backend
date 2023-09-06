@@ -3,24 +3,22 @@ const { users } = require("../appwrite/appwrite");
 const { Query } = require("node-appwrite");
 
 const isUserRegistered = async (req, res) => {
-  const phoneNumber = req.body.phoneNumber;
+  const { phone } = req.body;
 
   try {
     const response = await users.list([
-      Query.equal("phone", `+256${phoneNumber.slice(1)}`),
+      Query.equal("phone", `+256${phone.slice(1)}`),
     ]);
-  
 
     if (response?.total === 1) {
       // User is registered
       return res.status(200).json({
         status: "success",
-        message: "Phone number is already registered",
+        message: "The phone is already registered",
         userExists: true,
       });
-
     } else if (response?.total === 0) {
-        console.log("here")
+      console.log("here");
       // User is not registered
       return res.status(200).json({
         status: "error",
