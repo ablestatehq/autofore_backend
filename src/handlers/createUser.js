@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
         const customerMembership = await teams.createMembership(
           team,
           [],
-          `https://www.autofore.co/`,
+          `www.autofore.co`,
           undefined,
           user.$id
         );
