@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
         const customerMembership = await teams.createMembership(
           team,
           [],
-          `https://autofore.vercel.app`,
+          `https://www.autofore.co/`,
           undefined,
           user.$id
         );
