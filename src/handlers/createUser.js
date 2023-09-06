@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
         const customerMembership = await teams.createMembership(
           team,
           [],
-          "https://autofore.vercel.app",
+          `https://autofore.vercel.app`,
           undefined,
           user.$id
         );
@@ -55,14 +55,19 @@ const createUser = async (req, res) => {
               Status: "Failure",
               Details: "Error creating customer membership",
             };
+
+            console.log("Customer Membership 1: ", error);
             res.status(400).json(response);
           }
         }
       } catch (error) {
+        console.log("Error: ", error);
         const response = {
           Status: "Failure",
           Details: "Error creating customer membership",
         };
+        console.log("Customer Membership 2: ", error);
+
         res.status(400).json(response);
       }
     }
