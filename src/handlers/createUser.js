@@ -4,8 +4,6 @@ const team = process.env.APPWRITE_CUSTOMER_TEAM_ID;
 
 const createUser = async (req, res) => {
   const { phone, password } = req.body;
-  console.log("phone: ", phone);
-  console.log("password: ", password);
 
   if (!phone) {
     const response = {
@@ -14,6 +12,8 @@ const createUser = async (req, res) => {
     };
     return res.status(400).json(response);
   }
+  
+  const formattedPhone = `${phone}@autofore.com`;
 
   if (!password) {
     const response = {
@@ -25,7 +25,12 @@ const createUser = async (req, res) => {
   }
 
   try {
-    const user = await users.create(ID.unique(), phone, undefined, password);
+    const user = await users.create(
+      ID.unique(),
+      formattedPhone,
+      undefined,
+      password
+    );
 
     console.log("user: ", user);
 
