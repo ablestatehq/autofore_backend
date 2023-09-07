@@ -12,8 +12,7 @@ const createUser = async (req, res) => {
     };
     return res.status(400).json(response);
   }
-  
-  const formattedPhone = `${phone}@autofore.com`;
+
 
   if (!password) {
     const response = {
@@ -27,7 +26,7 @@ const createUser = async (req, res) => {
   try {
     const user = await users.create(
       ID.unique(),
-      formattedPhone,
+      phone,
       undefined,
       password
     );
