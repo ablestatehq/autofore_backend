@@ -20,7 +20,6 @@ const isUserRegistered = async (req, res) => {
       });
 
     } else if (response?.total === 0) {
-        console.log("here")
       // User is not registered
       return res.status(200).json({
         status: "error",
@@ -29,7 +28,6 @@ const isUserRegistered = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("Error checking user registration:", error);
     return res.status(500).json({
       status: "error",
       message: "Internal server error",

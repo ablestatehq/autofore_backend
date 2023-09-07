@@ -22,7 +22,6 @@ const { AFRICASTALKING_USERNAME, AFRICASTALKING_APIKEY } = process.env;
 
 const sendMessage = (phone, msg, country_code = "+256") => {
   const phone_number = country_code + phone.slice(1);
-
   const client = africastalking({
     username: AFRICASTALKING_USERNAME,
     apiKey: AFRICASTALKING_APIKEY,
