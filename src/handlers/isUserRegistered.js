@@ -4,12 +4,10 @@ const { Query } = require("node-appwrite");
 
 const isUserRegistered = async (req, res) => {
   const phoneNumber = req.body.phoneNumber;
+  const formattedPhone = `${phoneNumber}@autofore.com`;
 
   try {
-    const response = await users.list([
-      Query.equal("phone", `+256${phoneNumber.slice(1)}`),
-    ]);
-  
+    const response = await users.list([Query.equal("email", formattedPhone)]);
 
     if (response?.total === 1) {
       // User is registered
@@ -18,7 +16,6 @@ const isUserRegistered = async (req, res) => {
         message: "Phone number is already registered",
         userExists: true,
       });
-
     } else if (response?.total === 0) {
       // User is not registered
       return res.status(200).json({
