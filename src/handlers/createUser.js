@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
         const customerMembership = await teams.createMembership(
           team,
           [],
-          "http://localhost:3000/",
+          "https://aw.ablesate.cloud",
           undefined,
           user.$id
         );
