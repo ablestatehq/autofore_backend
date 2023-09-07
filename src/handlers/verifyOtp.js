@@ -65,15 +65,10 @@ const verifyOtp = async (req, res) => {
         if (compareDates(expirationDate, currentDate) === 1) {
           if (otpDocument.otp === otp) {
             try {
-              const otpDocument = await databases.updateDocument(
-                databaseId,
-                collectionId,
-                otpId,
-                {
-                  isVerified: true,
-                  updatedAt: currentDate,
-                }
-              );
+              await databases.updateDocument(databaseId, collectionId, otpId, {
+                isVerified: true,
+                updatedAt: currentDate,
+              });
 
               const response = {
                 Status: "Success",
