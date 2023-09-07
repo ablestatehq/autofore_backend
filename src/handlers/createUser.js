@@ -3,7 +3,9 @@ const { teams, users } = require("../appwrite/appwrite");
 const team = process.env.APPWRITE_CUSTOMER_TEAM_ID;
 
 const createUser = async (req, res) => {
-  const { phone } = req.body;
+  const { phone, password } = req.body;
+  console.log("phone: ", phone);
+  console.log("password: ", password);
 
   if (!phone) {
     const response = {
@@ -13,22 +15,31 @@ const createUser = async (req, res) => {
     return res.status(400).json(response);
   }
 
+  if (!password) {
+    const response = {
+      Status: "Failure",
+      Details: "Password not provided",
+    };
+
+    return res.status(400).json(response);
+  }
+
   try {
-    const user = await users.create(
-      ID.unique(),
-      undefined,
-      `+256${phone.slice(1)}`
-    );
+    const user = await users.create(ID.unique(), phone, undefined, password);
+
+    console.log("user: ", user);
 
     if (user) {
       try {
         const customerMembership = await teams.createMembership(
           team,
           [],
-          "https://aw.ablesate.cloud",
+          "https://aw.ablestate.cloud/",
           undefined,
           user.$id
         );
+
+        console.log("Customer membership: ", customerMembership);
 
         if (customerMembership) {
           const response = {
@@ -59,6 +70,7 @@ const createUser = async (req, res) => {
           }
         }
       } catch (error) {
+        console.log("Team membership creation error: ", error);
         const response = {
           Status: "Failure",
           Details: "Error creating customer membership",
@@ -67,6 +79,7 @@ const createUser = async (req, res) => {
       }
     }
   } catch (error) {
+    console.log("User creation error: ", error);
     const response = {
       Status: "Failure",
       Details: "Internal server error",
