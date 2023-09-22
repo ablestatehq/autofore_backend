@@ -5,6 +5,7 @@ const { Query } = require("node-appwrite");
 const isUserRegistered = async (req, res) => {
   const phoneNumber = req.body.phoneNumber;
   const formattedPhone = `${phoneNumber}@autofore.co`;
+  console.log("Phone Number: ", phoneNumber)
 
   try {
     const response = await users.list([Query.equal("email", formattedPhone)]);

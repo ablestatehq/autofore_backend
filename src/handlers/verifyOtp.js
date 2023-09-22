@@ -12,6 +12,10 @@ const verifyOtp = async (req, res) => {
   try {
     const { verificationKey, otp, check } = req.body;
 
+    console.log("Verification Key: ", verificationKey)
+    console.log("OTP: ", otp)
+    console.log("Check: ", check)
+
     if (!verificationKey) {
       const response = {
         Status: "Failure",
@@ -37,6 +41,7 @@ const verifyOtp = async (req, res) => {
 
     try {
       decoded = await decode(verificationKey);
+      console.log("Decoded: ", decoded)
     } catch (error) {
       const response = { Status: "Failure", Details: "Bad Request" };
       return res.status(400).json(response);
