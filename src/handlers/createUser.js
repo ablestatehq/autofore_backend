@@ -53,7 +53,7 @@ const createUser = async (req, res) => {
         const customerProfile = await databases.createDocument(
           databaseId,
           appwriteProfileCollectionId,
-          ID.unique(),
+          user.$id,
           {
             firstName,
             phoneNumber: phone.slice(0,10),
